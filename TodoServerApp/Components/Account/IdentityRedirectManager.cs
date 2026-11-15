@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components;
 
 namespace TodoServerApp.Components.Account
 {
@@ -21,7 +21,8 @@ namespace TodoServerApp.Components.Account
             uri ??= "";
 
             // Prevent open redirects.
-            if (!Uri.IsWellFormedUriString(uri, UriKind.Relative))
+            if (!Uri.IsWellFormedUriString(uri, UriKind.Relative)
+                || uri.StartsWith("//", StringComparison.Ordinal))
             {
                 uri = navigationManager.ToBaseRelativePath(uri);
             }
